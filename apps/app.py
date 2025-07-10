@@ -59,16 +59,18 @@ def send_slack(system_name, failed_domains):
 
 
 
-def run_for_file(file_path, system_name):
-    system_name = os.path.basename(os.path.dirname(file_path))
+def run_for_file(file_path):
+    system_name = os.path.basename(os.path.dirname(file_path))  # chỉ lấy tên folder
     with open(file_path) as f:
-        domains = [line.strip() for line in f if line.strip()]
+        # ✅ Remove duplicate domain line
+        domains = list(set(line.strip() for line in f if line.strip()))
+
     with ThreadPoolExecutor(max_workers=THREADS) as executor:
         failed = list(filter(None, executor.map(lambda d: check(d, system_name), domains)))
+
     if failed:
         with open(f"failed_{system_name}.log", "w") as f:
             f.write("\n".join(failed))
-        send_slack(system_name, failed)
 
 
 
