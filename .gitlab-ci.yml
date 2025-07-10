@@ -20,6 +20,7 @@ build_push_image:
   image: hub.nexdev.net/base/docker:24.0.4-bash-jq-jinja
   script:
     - cd apps
-    - docker build -t hub.nexdev.net/base/cronjob-checkdomain:latest .
-    - docker push hub.nexdev.net/base/cronjob-checkdomain:latest
+    - docker login -u $DOCKER_REG_LOCAL_USERNAME -p "$DOCKER_REG_PASSWORD" $DOCKER_REG_LOCAL_URL
+    - docker build -t $DOCKER_REG_LOCAL_URL/base/cronjob-checkdomain:latest .
+    - docker push $DOCKER_REG_LOCAL_URL/base/cronjob-checkdomain:latest
 
