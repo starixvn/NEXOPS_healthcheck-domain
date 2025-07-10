@@ -11,6 +11,11 @@ generate_configmap:
     - git config --global user.name "CI Bot"
     - git config --global user.email "ci-bot@nexdev.net"
 
+
+    - git worktree prune
+    - rm -rf /tmp/ci-configmap || true
+
+
     - sh tools/gen-configmap.sh
 
     # Prepare ci-configmap branch
