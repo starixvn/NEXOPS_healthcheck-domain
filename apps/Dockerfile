@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM hub.nexdev.net/base/python:3.10-alpine
 
 WORKDIR /app
 
