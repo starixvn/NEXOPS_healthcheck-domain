@@ -2,9 +2,9 @@ stages:
   - generate
 
 generate_configmap:
-  rules:
-    - changes:
-        - domains/**/* 
+  # rules:
+  #   - changes:
+  #       - domains/**/* 
   stage: generate
   image: hub.nexdev.net/base/alpine:git-3.21
   script:
