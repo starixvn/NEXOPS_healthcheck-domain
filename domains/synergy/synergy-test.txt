@@ -1,0 +1,16 @@
+mountfile-klp.starixplay.com 
+msite-klp.starixplay.com 
+msite2-klp.starixplay.com 
+napdw-klp.starixplay.com 
+napmailfiles-klp.starixplay.com
+napsc-klp.starixplay.com 
+owp-chat-klp.starixplay.com
+owp-klp.starixplay.com
+parlayrms-klp.starixplay.com 
+reports-klp.starixplay.com 
+riskcontrol-klp.starixplay.com 
+settle-klp.starixplay.com 
+tgrs-klp.starixplay.com 
+tvs-klp.starixplay.com
+vn-reward-wallet-api-klp.starixplay.com
+settle-setting.stag-kl.oneops.net 
