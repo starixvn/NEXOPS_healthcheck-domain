@@ -86,7 +86,7 @@ def run_for_file(file_path):
     send_slack_message(message)
 
 
-###
+####
 def main():
     folder = "domains"
     for root, dirs, files in os.walk(folder):
