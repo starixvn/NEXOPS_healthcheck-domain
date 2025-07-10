@@ -32,4 +32,4 @@ generate_configmap:
     - git commit -m "ci update configmap from domains" || echo "No changes"
 # Set lại origin với quyền push bằng CI_JOB_TOKEN
     - git remote set-url origin https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.nexdev.net/NEXOPS/healthcheck-domain.git
-    - git push origin ci-configmap
+    - git push -f origin ci-configmap
