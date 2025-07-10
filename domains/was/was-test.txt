@@ -33,3 +33,4 @@ fs-simple-klp.starixplay.com
 fs-service-simple-klp.starixplay.com
 fs-bsngservice-simple-klp.starixplay.com
 cts-vrservice-simple-klp.starixplay.com
+sentry.starixplay.com
