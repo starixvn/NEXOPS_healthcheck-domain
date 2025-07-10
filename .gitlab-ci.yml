@@ -10,10 +10,20 @@ generate_configmap:
   script:
     - git config --global user.name "CI Bot"
     - git config --global user.email "ci-bot@nexdev.net"
-    - sh tools/gen-configmap.sh
 
-    # checkout another branch
-    - git checkout -b ci-configmap || git checkout ci-configmap
+    # Generate configmap.yaml từ domains/**
+    - bash tools/gen-configmap.sh
+
+    # Tạo nhánh worktree ci-configmap
+    - git fetch origin ci-configmap || true
+    - git worktree add /tmp/ci-configmap ci-configmap || git worktree add -b ci-configmap /tmp/ci-configmap origin/main
+
+    # Copy file vào nhánh kia
+    - mkdir -p /tmp/ci-configmap/k8s
+    - cp k8s/configmap.yaml /tmp/ci-configmap/k8s/configmap.yaml
+
+    # Commit + push file
+    - cd /tmp/ci-configmap
     - git add k8s/configmap.yaml
-    - git commit -m "chore(ci) update configmap" || echo "No changes"
-    - git push -f origin ci-configmap
+    - git commit -m "ci update configmap from domains" || echo "No changes"
+    - git push origin ci-configmap
