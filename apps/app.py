@@ -36,12 +36,12 @@ import json
 # SLACK_WEBHOOK = os.getenv("SLACK_WEBHOOK")  # export biến này vào CronJob
 SLACK_WEBHOOK = "https://hooks.slack.com/services/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"  # export biến này vào CronJob
 
-def send_slack(system_name, failed_domains):
-    if not SLACK_WEBHOOK or not failed_domains:
-        return
-
-    text = f"❌ *{system_name}* have {len(failed_domains)} domain errors:\n" + \
-            "\n".join(f"- `{d}`" for d in failed_domains)
+def send_slack_message(message):
+    if SLACK_WEBHOOK:
+        try:
+            requests.post(SLACK_WEBHOOK, json={"text": message})
+        except Exception as e:
+            print(f"[Slack] ❌ Failed to send message: {e}")
 
     payload = {"text": text}
     try:
@@ -60,10 +60,12 @@ def send_slack(system_name, failed_domains):
 
 
 def run_for_file(file_path):
-    system_name = os.path.basename(os.path.dirname(file_path))  # chỉ lấy tên folder
+    system_name = os.path.basename(os.path.dirname(file_path))  # e.g. 'was'
+
     with open(file_path) as f:
-        # ✅ Remove duplicate domain line
         domains = list(set(line.strip() for line in f if line.strip()))
+
+    total = len(domains)
 
     with ThreadPoolExecutor(max_workers=THREADS) as executor:
         failed = list(filter(None, executor.map(lambda d: check(d, system_name), domains)))
@@ -71,6 +73,17 @@ def run_for_file(file_path):
     if failed:
         with open(f"failed_{system_name}.log", "w") as f:
             f.write("\n".join(failed))
+
+    # Slack message format
+    message = f"✅ Completed domain health check for *system `{system_name}`*\n" \
+              f"Total domains checked: {total}\n"
+
+    if failed:
+        message += f"❌ Failed: {len(failed)}\n" + "\n- " + "\n- ".join(failed)
+    else:
+        message += "✅ All domains are healthy 🎉"
+
+    send_slack_message(message)
 
 
 
