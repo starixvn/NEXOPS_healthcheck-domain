@@ -9,4 +9,5 @@ generate_configmap:
     - sh tools/gen-configmap.sh
     - git add k8s/configmap.yaml
     - git commit -m "update configmap from domain list"
+    - git remote set-url origin https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.nexdev.net/NEXOPS/healthcheck-domain.git
     - git push origin $CI_COMMIT_REF_NAME
