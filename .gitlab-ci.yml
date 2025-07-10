@@ -6,7 +6,7 @@ generate_configmap:
   image: hub.nexdev.net/base/alpine:git-3.21
   script:
     - git config --global user.name "CI Bot"
-    - bash tools/gen-configmap.sh
+    - sh tools/gen-configmap.sh
     - git add k8s/configmap.yaml
     - git commit -m "update configmap from domain list"
     - git push origin $CI_COMMIT_REF_NAME
