@@ -1,35 +1,25 @@
 stages:
-  - generate
+  - generate-config-map
+  - build-image
 
 generate_configmap:
-  # rules:
-  #   - changes:
-  #       - domains/**/* 
-  stage: generate
+  rules:
+    - changes:
+        - domains/**/* 
+  stage: generate-config-map
   image: hub.nexdev.net/base/alpine:git-3.21
   script:
     - git config --global user.name "CI Bot"
     - git config --global user.email "ci-bot@nexdev.net"
 
+build_push_image:
+  stage: build-image
+  rules:
+    - changes:
+        - apps/**/*
+  image: hub.nexdev.net/base/docker:24.0.4-bash-jq-jinja
+  script:
+    - cd apps
+    - docker build -t hub.nexdev.net/base/cronjob-checkdomain:latest .
+    - docker push hub.nexdev.net/base/cronjob-checkdomain:latest
 
-    - git worktree prune
-    - rm -rf /tmp/ci-configmap || true
-
-
-    - sh tools/gen-configmap.sh
-
-    # Prepare ci-configmap branch
-    - git fetch origin ci-configmap || true
-    - git worktree add /tmp/ci-configmap ci-configmap || git worktree add -b ci-configmap /tmp/ci-configmap origin/main
-
-    # Copy file từ /tmp/gen/ → /tmp/ci-configmap/k8s/
-    - mkdir -p /tmp/ci-configmap/k8s
-    - cp /tmp/gen/k8s/configmap.yaml /tmp/ci-configmap/k8s/configmap.yaml
-
-    # Commit + push
-    - cd /tmp/ci-configmap
-    - git add k8s/configmap.yaml
-    - git commit -m "ci update configmap from domains" || echo "No changes"
-# Set lại origin với quyền push bằng CI_JOB_TOKEN
-    - git remote set-url origin https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.nexdev.net/NEXOPS/healthcheck-domain.git
-    - git push -f origin ci-configmap

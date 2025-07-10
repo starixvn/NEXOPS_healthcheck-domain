@@ -71,8 +71,6 @@ def run_for_file(file_path, system_name):
 
 
 
-
-
 def main():
     folder = "domains"
     for root, dirs, files in os.walk(folder):
