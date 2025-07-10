@@ -14,4 +14,3 @@ tgrs-klp.starixplay.com
 tvs-klp.starixplay.com
 vn-reward-wallet-api-klp.starixplay.com
 settle-setting.stag-kl.oneops.net
-sentry.starixplay.com
