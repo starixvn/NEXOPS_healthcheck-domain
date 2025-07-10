@@ -15,7 +15,7 @@ generate_configmap:
     - cd /tmp/k8s-manifest/cronjob-healthcheck/
     - git config --global user.name "CI Bot"
     - git config --global user.email "ci-bot@nexdev.net"
-    - git add cronjob-healthcheck/configmap.yaml
+    - git add configmap.yaml
     - git commit -m "ci update configmap from domain list" || echo "No changes"
     - git push origin main
 
