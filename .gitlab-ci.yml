@@ -12,4 +12,5 @@ generate_configmap:
     - git commit -m "update configmap from domain list"
     - git remote set-url origin https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.nexdev.net/NEXOPS/healthcheck-domain.git
     - echo "🔍 CI_COMMIT_REF_NAME = $CI_COMMIT_REF_NAME"
+    - git push origin HEAD:$CI_COMMIT_REF_NAME
     # - git push origin main
