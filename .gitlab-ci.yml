@@ -28,6 +28,6 @@ build_push_image:
   script:
     - cd apps
     - docker login -u $DOCKER_REG_LOCAL_USERNAME -p "$DOCKER_REG_PASSWORD" $DOCKER_REG_LOCAL_URL
-    - docker build -t $DOCKER_REG_LOCAL_URL/nexops/cronjob-checkdomain:latest .
-    - docker push $DOCKER_REG_LOCAL_URL/nexops/cronjob-checkdomain:latest
+    - docker build -t $DOCKER_REG_LOCAL_URL/nexops/cronjob-checkdomain:test .
+    - docker push $DOCKER_REG_LOCAL_URL/nexops/cronjob-checkdomain:test
 
