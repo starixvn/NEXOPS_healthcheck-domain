@@ -6,6 +6,7 @@ echo "apiVersion: v1
 kind: ConfigMap
 metadata:
   name: domain-lists
+  namespace: nexops
 data:" > "$OUTPUT"
 
 find domains -type f -name "*.txt" | while read file; do
