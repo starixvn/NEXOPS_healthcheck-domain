@@ -43,18 +43,6 @@ def send_slack_message(message):
         except Exception as e:
             print(f"[Slack] ❌ Failed to send message: {e}")
 
-    payload = {"text": text}
-    try:
-        r = requests.post(
-            SLACK_WEBHOOK,
-            data=json.dumps(payload),
-            headers={'Content-Type': 'application/json'}
-        )
-        if r.status_code != 200:
-            print(f"🚨 Slack error {r.status_code}: {r.text}")
-    except Exception as e:
-        print(f"🚨 Slack exception: {e}")
-
 
 
 
@@ -95,7 +83,7 @@ def main():
                 file_path = os.path.join(root, file)
                 rel_path = os.path.relpath(file_path, folder)
                 system_name = rel_path.replace("/", "_").replace(".txt", "")
-                run_for_file(file_path, system_name)
+                run_for_file(file_path)
                 
 if __name__ == "__main__":
     main()

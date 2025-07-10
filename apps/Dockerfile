@@ -9,4 +9,4 @@ COPY app.py requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 ## Entry point
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
