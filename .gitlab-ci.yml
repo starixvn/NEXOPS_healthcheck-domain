@@ -12,7 +12,7 @@ generate_configmap:
     - git config --global user.email "ci-bot@nexdev.net"
 
     # Generate configmap.yaml từ domains/**
-    - bash tools/gen-configmap.sh
+    - sh tools/gen-configmap.sh
 
     # Tạo nhánh worktree ci-configmap
     - git fetch origin ci-configmap || true
