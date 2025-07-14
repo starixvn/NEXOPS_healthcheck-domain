@@ -34,7 +34,7 @@ import requests
 import json
 
 # SLACK_WEBHOOK = os.getenv("SLACK_WEBHOOK")  # export biến này vào CronJob
-SLACK_WEBHOOK = "https://hooks.slack.com/services/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"  # export biến này vào CronJob
+SLACK_WEBHOOK = "https://hooks.slack.com/services/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"  # export biến này vào CronJob
 
 def send_slack_message(message):
     if SLACK_WEBHOOK:
