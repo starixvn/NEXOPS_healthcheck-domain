@@ -1,29 +1,30 @@
 stages:
-  - generate-config-map
+  # - generate-config-map
   - build-image
 
-generate_configmap:
-  rules:
-    - changes:
-        - domains/**/* 
-  stage: generate-config-map
-  image: hub.nexdev.net/base/alpine:git-3.21
-  script:
-    - sh tools/gen-configmap.sh
-    - git clone https://${DOCKER_REG_USERNAME}:glpat-AGUoQ8Djysvmd1wxehea@gitlab.nexdev.net/NEXOPS/k8s-manifest.git /tmp/k8s-manifest
-    - cp /tmp/gen/k8s/configmap.yaml /tmp/k8s-manifest/cronjob-healthcheck/configmap.yaml
-    - cd /tmp/k8s-manifest/cronjob-healthcheck/
-    - git config --global user.name "CI Bot"
-    - git config --global user.email "ci-bot@nexdev.net"
-    - git add configmap.yaml
-    - git commit -m "ci update configmap from domain list" || echo "No changes"
-    - git push origin main
+# generate_configmap:
+#   rules:
+#     - changes:
+#         - domains/**/* 
+#   stage: generate-config-map
+#   image: hub.nexdev.net/base/alpine:git-3.21
+#   script:
+#     - sh tools/gen-configmap.sh
+#     - git clone https://${DOCKER_REG_USERNAME}:glpat-AGUoQ8Djysvmd1wxehea@gitlab.nexdev.net/NEXOPS/k8s-manifest.git /tmp/k8s-manifest
+#     - cp /tmp/gen/k8s/configmap.yaml /tmp/k8s-manifest/cronjob-healthcheck/configmap.yaml
+#     - cd /tmp/k8s-manifest/cronjob-healthcheck/
+#     - git config --global user.name "CI Bot"
+#     - git config --global user.email "ci-bot@nexdev.net"
+#     - git add configmap.yaml
+#     - git commit -m "ci update configmap from domain list" || echo "No changes"
+#     - git push origin main
 
 build_push_image:
   stage: build-image
   rules:
     - changes:
         - apps/**/*
+        - domains/**/* 
   image: hub.nexdev.net/base/docker:24.0.4-bash-jq-jinja
   script:
     - cd apps

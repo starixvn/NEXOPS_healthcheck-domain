@@ -69,7 +69,7 @@ def run_for_file(file_path):
     if failed:
         message += f"❌ Failed: {len(failed)}\n" + "\n- " + "\n- ".join(failed)
     else:
-        message += "✅ All domains are healthy 🎉"
+        message += "✅ All domains are correct mapping 🎉"
 
     send_slack_message(message)
 
