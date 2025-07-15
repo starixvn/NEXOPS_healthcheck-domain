@@ -281,4 +281,14 @@ alpha-content.oneops.net
 alpha-content-2.oneops.net
 alpha-content-demo.oneops.net
 123.alpha-stag-kl.gatonic.com
-123.stag-kl.oneops.net 
+123.stag-kl.oneops.net
+alp1.gatonic.com
+alp2.gatonic.com
+alp3.gatonic.com
+mbp1.gatonic.com
+mbp2.gatonic.com
+mbp3.gatonic.com
+mbc.gatonic.com
+mb.gatonic.com
+789y.gatonic.com
+7y.gatonic.com
